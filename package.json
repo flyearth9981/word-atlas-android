@@ -1,0 +1,55 @@
+{
+  "name": "word-atlas-android",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Word Atlas 词光 — Android port (Capacitor shell around the upstream web app)",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "build:android": "tsc -b && vite build --mode android",
+    "preview": "vite preview --host 0.0.0.0",
+    "test": "node --import tsx --test src/store/srs.test.ts src/store/store.test.ts src/lib/text.test.ts src/lib/typing.test.ts",
+    "format": "prettier --write src vite.config.ts capacitor.config.ts scripts/android/*.mjs package.json tsconfig.json",
+    "android:add": "cap add android",
+    "android:patch": "node scripts/android/patch-native.mjs",
+    "android:sync": "npm run build:android && cap sync android",
+    "android:media": "node scripts/android/pack-media.mjs",
+    "android:verify": "node scripts/android/verify-pack.mjs",
+    "android:apk": "npm run android:sync && npm run android:patch && npm run android:media && node scripts/android/gradle.mjs assembleDebug",
+    "android:release": "npm run android:sync && npm run android:patch && npm run android:media && node scripts/android/gradle.mjs assembleRelease",
+    "android:install": "adb install -r android/app/build/outputs/apk/debug/app-debug.apk",
+    "android:install:release": "adb install -r android/app/build/outputs/apk/release/app-release.apk",
+    "android:log": "adb logcat -s Capacitor/Console Capacitor chromium"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/keyboard": "^8.0.6",
+    "@capacitor/local-notifications": "^8.3.1",
+    "@capacitor/share": "^8.0.3",
+    "@capacitor/splash-screen": "^8.0.2",
+    "@capacitor/status-bar": "^8.0.4",
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "ts-fsrs": "^5.4.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "prettier": "^3.9.10",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "vite": "^6.4.1"
+  }
+}

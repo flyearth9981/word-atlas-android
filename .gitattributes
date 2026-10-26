@@ -1,0 +1,16 @@
+# 统一换行符，避免 Windows / Linux 之间来回提交产生整文件 diff
+* text=auto eol=lf
+
+# Windows 批处理必须是 CRLF，否则 cmd 解析可能出错
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 这些必须是二进制，git 不能碰
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.mp3 binary
+*.woff2 binary
+*.jks binary
+*.apk binary

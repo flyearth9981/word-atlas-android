@@ -1,0 +1,16 @@
+# 依赖与构建产物（android/ 下的规则由 android/.gitignore 负责）
+node_modules/
+dist/
+
+# 签名：私钥和密码都不进版本库，自己另外备份
+android/keystore.properties
+android/app/keystore/
+*.jks
+*.keystore
+
+# 产物
+*.apk
+*.aab
+
+# tsc 增量缓存
+*.tsbuildinfo
